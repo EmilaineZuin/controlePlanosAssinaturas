@@ -147,6 +147,12 @@ client_x509_cert_url = "..."
 
 > **Atenção:** Nunca commite o arquivo `secrets.toml` ou `secrets.json`. Adicione ao `.gitignore`.
 
+#### 4.4 Configure no Streamlit Community Cloud
+Se der erro de execução no streamlit:
+O arquivo `.streamlit/secrets.toml` da sua máquina não é enviado automaticamente para o Streamlit Cloud. No painel do Streamlit, abra o app, acesse **Settings > Secrets** e cole a mesma configuração TOML da seção anterior, incluindo a seção `[google_credentials]`. Salve as alterações e reinicie/reimplante o app.
+
+Não publique as credenciais no repositório, em issues ou em mensagens. Se a chave privada já foi exposta, revogue-a no Google Cloud e gere uma nova.
+
 ### 5. Configure a URL da planilha
 
 Edite o arquivo `config.py` e atualize `SHEET_URL` com a URL da sua planilha:

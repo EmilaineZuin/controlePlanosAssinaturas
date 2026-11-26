@@ -10,8 +10,17 @@ SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 def connect_to_gsheet():
     """Estabelece conexão com o Google Sheets (reutilizada via cache de recurso)."""
     try:
+        credentials_info = st.secrets.get("google_credentials")
+        if not credentials_info:
+            st.error(
+                "Credenciais do Google Sheets não configuradas. No Streamlit Cloud, "
+                "abra o app em Settings > Secrets e adicione a seção "
+                "[google_credentials] com os dados da conta de serviço."
+            )
+            return None
+
         creds = Credentials.from_service_account_info(
-            st.secrets["google_credentials"], scopes=SCOPES
+            credentials_info, scopes=SCOPES
         )
         client = gspread.authorize(creds)
         return client
